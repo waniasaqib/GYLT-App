@@ -20,4 +20,14 @@ router.route('/').get( async(req, res) => {
 
     })
 
+router.route('/logTodaysData').post(async (req, res => {
+    const username = req.body.username
+    const arr = req.body.arr
+
+    for(i=0; i<arr.length(); i++) {
+        
+    }
+
+}))
+
 module.exports = router

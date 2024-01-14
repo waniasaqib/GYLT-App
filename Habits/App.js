@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { Pressable, StyleSheet, Text, View, TextInput} from 'react-native';
+import CheckBox from 'react-native-check-box'
 import React, {useState} from 'react'
 
 
@@ -16,8 +17,149 @@ export default function App() {
 }
 
 function HomePage() {
+  const [nextPage, setNextPage] = React.useState()
+  return (
+    <View>
+      {
+        nextPage == undefined ? <Options setNextPage={setNextPage}/> : 
+        nextPage == "timer"? <Timer/> : 
+        nextPage == "today"? <TodaysTasks/> : 
+        <WeeksProgress/>
+      }
+    </View>
+  )
+}
+
+function Options(props) {
+    return (
+      <View>
+        <View>
+          <Text>GYLT</Text>
+          <Text>so... what's the plan for today?</Text>
+        </View>
+        <View>
+          <Pressable onPress={() => props.setNextPage("timer")}><Text>Start a Study Session</Text></Pressable>
+          <Pressable onPress={() => props.setNextPage("week")}><Text>Track Habits</Text></Pressable>
+          <Pressable onPress={() => props.setNextPage("today")}><Text>Input Today's Habit</Text></Pressable>
+        </View>
+        <Pressable><Text>Logout</Text></Pressable>
+        
+      </View>
+    )
 
 }
+
+function Timer() {
+  return (
+    <View></View>
+  )
+}
+
+function TodaysTasks() {
+  const [clicked1, setClicked1] = React.useState(false)
+  const [clicked2, setClicked2] = React.useState(false)
+  const [clicked3, setClicked3] = React.useState(false)
+  const [clicked4, setClicked4] = React.useState(false)
+  const [clicked5, setClicked5] = React.useState(false)
+
+  const pushData = async () => {
+    arr = []
+    if(clicked1 == true) {
+      arr.push(1)
+    }
+    else {
+      arr.push(0)
+    }
+    if(clicked2 == true) {
+      arr.push(1)
+    }
+    else {
+      arr.push(0)
+    }
+    if(clicked3 == true) {
+      arr.push(1)
+    }
+    else {
+      arr.push(0)
+    }
+    if(clicked4 == true) {
+      arr.push(1)
+    }
+    else {
+      arr.push(0)
+    }
+    if(clicked5 == true) {
+      arr.push(1)
+    }
+    else {
+      arr.push(0)
+    }
+
+    await fetch('')
+
+  }
+
+  return (
+    <View>
+      <View>
+        <Text>GVLT</Text>
+      </View>
+      <View>
+        <Text>Input Today's Habits</Text>
+      </View>
+      <View>
+      <CheckBox
+          style={{flex: 1, padding: 10}}
+          onClick={()=>{
+            setClicked1(!clicked1)
+          }}
+          isChecked={!clicked1}
+          leftText={"Drink 8 cups of Water"}
+      />
+      <CheckBox
+          style={{flex: 1, padding: 10}}
+          onClick={()=>{
+            setClicked2(!clicked2)
+          }}
+          isChecked={!clicked2}
+          leftText={"Sleep 8 hours"}
+      />
+      <CheckBox
+          style={{flex: 1, padding: 10}}
+          onClick={()=>{
+            setClicked3(!clicked3)
+          }}
+          isChecked={!clicked3}
+          leftText={"Shower"}
+      />
+      <CheckBox
+          style={{flex: 1, padding: 10}}
+          onClick={()=>{
+            setClicked4(!clicked4)
+          }}
+          isChecked={!clicked4}
+          leftText={"Exercise for 30 minutes"}
+      />
+      <CheckBox
+          style={{flex: 1, padding: 10}}
+          onClick={()=>{
+            setClicked5(!clicked5)
+          }}
+          isChecked={!clicked5}
+          leftText={"Eat 3 well-balanced meals"}
+      />
+      </View>
+      <Pressable><Text onPress={() => pushData()}>Submit</Text></Pressable>
+    </View>
+  )
+}
+
+function WeeksProgress() {
+  return (
+    <View></View>
+  )
+}
+
 
 function Create() {
 
